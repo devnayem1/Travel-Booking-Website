@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prom Coast Guide | South Gippsland, Victoria</title>
+<meta name="description" content="Your local guide to the Prom Coast in South Gippsland: towns, beaches, walks, food, scenic drives and places to stay.">
+<link rel="canonical" href="https://promcoast.com.au/">
+<meta property="og:title" content="Prom Coast Guide">
+<meta property="og:description" content="Explore towns, beaches, walks and places to stay on the Prom Coast, South Gippsland.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://promcoast.com.au/">
+<link rel="icon" href="https://promcoast.com.au/wp-content/uploads/2026/09/2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--ink:#0d2b36;--sea:#12697a;--deep:#0a3442;--mist:#e9f1f0;--lichen:#d9861c;--white:#fff;--line:#cfdcdb;--r:6px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font:400 1rem/1.6 Figtree,system-ui,sans-serif;color:var(--ink);background:#fff}
+h1,h2,h3{font-family:'Bricolage Grotesque',Figtree,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}img{max-width:100%;height:auto}
+:focus-visible{outline:3px solid var(--lichen);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+.btn{display:inline-block;background:var(--lichen);color:#fff;font-weight:600;border:0;border-radius:var(--r);padding:.8rem 1.3rem;text-decoration:none;cursor:pointer;font-size:1rem;min-height:44px}
+.btn:hover{background:#b9720f}.btn.alt{background:transparent;border:2px solid #fff}.btn.alt:hover{background:rgba(255,255,255,.15)}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar{display:flex;align-items:center;gap:20px;min-height:68px}
+.logo img{height:48px;width:auto;display:block}
+nav.main{display:flex;gap:22px;margin-left:auto;align-items:center}
+nav.main a{text-decoration:none;font-weight:500;padding:8px 0}nav.main a:hover{color:var(--sea)}
+.menu{display:none;margin-left:auto;background:none;border:2px solid var(--ink);border-radius:var(--r);padding:8px 14px;font:600 1rem Figtree;min-height:44px}
+.hsearch{position:relative}.hsearch input{border:1px solid var(--line);border-radius:var(--r);padding:9px 12px;width:200px;font:inherit}
+#results{position:absolute;right:0;top:44px;width:340px;max-height:60vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);display:none;z-index:60}
+#results a,#results p{display:block;padding:10px 14px;margin:0;text-decoration:none;border-bottom:1px solid var(--mist)}
+#results a:hover{background:var(--mist)}#results small{color:var(--sea);display:block}
+.hero{background:linear-gradient(180deg,rgba(10,52,66,.55),rgba(10,52,66,.88)),var(--deep) center/cover no-repeat;color:#fff;padding:88px 0 56px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:800;max-width:14ch}
+.hero p.lead{max-width:56ch;font-size:1.15rem;margin:18px 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.book{background:#fff;color:var(--ink);border-radius:var(--r);margin-top:44px;padding:20px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:12px;align-items:end;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.book label{display:block;font-size:.85rem;font-weight:600;margin-bottom:4px}
+.book input,.book select{width:100%;padding:11px;border:1px solid #9db3b2;border-radius:var(--r);font:inherit;min-height:44px;background:#fff}
+#bmsg{grid-column:1/-1;margin:0;font-size:.92rem;min-height:1.4em}#bmsg.err{color:#b3261e;font-weight:600}
+section{padding:72px 0}section.tint{background:var(--mist)}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sh h2{font-size:clamp(1.8rem,3.5vw,2.6rem)}.sh p{margin:6px 0 0;max-width:58ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.tile{display:block;background:#fff;border:1px solid var(--line);border-left:5px solid var(--sea);border-radius:var(--r);padding:18px 18px;text-decoration:none;font-weight:600;transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-left-color:var(--lichen)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{border:1.5px solid var(--sea);background:#fff;color:var(--sea);border-radius:99px;padding:7px 16px;font:600 .92rem Figtree;cursor:pointer;min-height:40px}
+.chip[aria-pressed=true]{background:var(--sea);color:#fff}
+.mapbox{display:grid;grid-template-columns:1fr 300px;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+#map{height:560px;background:var(--mist)}#mapmsg{display:flex;align-items:center;justify-content:center;height:100%;padding:20px;text-align:center}
+#list{max-height:560px;overflow:auto;border-left:1px solid var(--line)}
+#list button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--mist);background:#fff;padding:12px 16px;font:inherit;cursor:pointer}
+#list button:hover{background:var(--mist)}#list small{color:var(--sea)}
+.mapbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.mapbar input,.tsearch{padding:10px 12px;border:1px solid #9db3b2;border-radius:var(--r);font:inherit;min-width:240px;min-height:44px}
+.stay{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.card h3{font-size:1.4rem}.card p{margin:0;flex:1}
+.note{font-size:.9rem;color:#3f5a63}
+footer{background:var(--deep);color:#dbe9e8;padding:56px 0 30px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+footer img{height:64px;width:auto;background:#fff;padding:6px 10px;border-radius:var(--r)}
+footer h3{font-size:1.05rem;color:#fff;margin-bottom:10px}footer ul{list-style:none;padding:0;margin:0}footer li{margin:6px 0}
+footer a{text-decoration:none}footer a:hover{text-decoration:underline}
+.copy{border-top:1px solid rgba(255,255,255,.2);margin-top:32px;padding-top:18px;font-size:.9rem}
+@media(max-width:900px){
+ nav.main{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:#fff;padding:12px 20px 20px;border-bottom:1px solid var(--line);gap:0}
+ nav.main.open{display:flex}nav.main a{padding:14px 0;border-bottom:1px solid var(--mist)}
+ .menu{display:block}.hsearch{margin:10px 0}.hsearch input{width:100%}#results{width:100%;left:0;right:auto}
+ .book{grid-template-columns:1fr 1fr}.book .full{grid-column:1/-1}
+ .mapbox{grid-template-columns:1fr}#map{height:420px}#list{border-left:0;border-top:1px solid var(--line);max-height:260px}
+ footer .cols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){.book{grid-template-columns:1fr}footer .cols{grid-template-columns:1fr}.hero{padding-top:56px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+ <div class="wrap bar">
+  <a class="logo" href="https://promcoast.com.au/" aria-label="Prom Coast home"><img src="https://promcoast.com.au/wp-content/uploads/2026/06/PromCoastVIctoriaLogo.webp" alt="Prom Coast Victoria" width="160" height="48"></a>
+  <button class="menu" id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav class="main" id="nav" aria-label="Main">
+   <a href="#towns">Towns</a>
+   <a href="#things">Things to do</a>
+   <a href="#map-section">Map</a>
+   <a href="#stay">Accommodation</a>
+   <a href="https://promcoast.com.au/contact/">Contact</a>
+   <div class="hsearch" role="search">
+    <label for="q" class="skip">Search Prom Coast</label>
+    <input id="q" type="search" placeholder="Search towns, things to do…" autocomplete="off">
+    <div id="results" role="listbox" aria-live="polite"></div>
+   </div>
+   <a class="btn" href="#book">Find a stay</a>
+  </nav>
+ </div>
+</header>
+
+<main id="main">
+<div class="hero" id="hero">
+ <div class="wrap">
+  <h1>Start your story on the Prom Coast</h1>
+  <p class="lead">Where history meets breathtaking beauty, and every visit feels like an escape. Beaches, headlands and rolling green hills, an easy drive from Melbourne.</p>
+  <div class="cta">
+   <a class="btn" href="#things">Explore things to do</a>
+   <a class="btn alt" href="#map-section">Open the map</a>
+  </div>
+
+  <form class="book" id="book" novalidate aria-label="Search accommodation">
+   <div class="full"><label for="dest">Where to?</label><select id="dest"></select></div>
+   <div><label for="cin">Check-in</label><input type="date" id="cin" required></div>
+   <div><label for="cout">Check-out</label><input type="date" id="cout" required></div>
+   <div><label for="gst">Guests</label><select id="gst"></select></div>
+   <button class="btn" type="submit">Search stays</button>
+   <p id="bmsg" class="note" role="status">Live availability and prices are shown by Booking.com, where you complete your booking.</p>
+  </form>
+ </div>
+</div>
+
+<section id="things"><div class="wrap">
+ <div class="sh"><div><h2>Things to do</h2><p>Pick a theme and dive into the local guide.</p></div></div>
+ <div class="grid" id="thingsGrid"></div>
+</div></section>
+
+<section class="tint" id="map-section"><div class="wrap">
+ <div class="sh"><div><h2>Prom Coast map</h2><p>Zoom, pan and tap a marker to open the guide for that place.</p></div></div>
+ <div class="mapbar"><input id="msearch" type="search" placeholder="Find a place on the map" aria-label="Find a place on the map"></div>
+ <div class="chips" id="chips" role="group" aria-label="Map categories"></div>
+ <div class="mapbox">
+  <div id="map" aria-label="Interactive map of the Prom Coast"><div id="mapmsg">Loading map…</div></div>
+  <div id="list" aria-label="Places on the map"></div>
+ </div>
+ <p class="note">Town positions are approximate town centres. Beach, walk and restaurant markers can be added to the <code>PLACES</code> list in this file once verified coordinates are available.</p>
+</div></section>
+
+<section id="towns"><div class="wrap">
+ <div class="sh"><div><h2>Prom Coast towns</h2><p>Twenty-three towns and villages, from Inverloch to Yanakie.</p></div>
+ <input class="tsearch" id="tsearch" type="search" placeholder="Filter towns" aria-label="Filter towns"></div>
+ <div class="grid" id="townGrid"></div>
+ <p id="tempty" class="note" hidden>No towns match that search. Try a different name.</p>
+</div></section>
+
+<section class="tint" id="stay"><div class="wrap">
+ <div class="sh"><div><h2>Places to stay</h2><p>Search with your dates above, or start from one of these.</p></div></div>
+ <div class="stay">
+  <div class="card"><h3>A Prom Coast favourite</h3><p>Our recommended local stay.</p><a class="btn" href="https://promcoast.au" target="_blank" rel="noopener">View stay</a></div>
+  <div class="card"><h3>Wilsons Promontory National Park</h3><p>Stays near the park, on Booking.com.</p><a class="btn" data-book="Wilsons Promontory National Park, Australia" href="#book">Search stays</a></div>
+  <div class="card"><h3>Greater Gippsland</h3><p>A wider search across the region.</p><a class="btn" data-book="Gippsland, Australia" href="#book">Search stays</a></div>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+ <div class="cols">
+  <div><img src="https://promcoast.com.au/wp-content/uploads/2026/06/PromCoastVIctoriaLogo.webp" alt="Prom Coast Victoria" width="160" height="64" loading="lazy">
+   <p>Prom Coast is your trusted local guide for the Prom Coast and surrounding areas.</p></div>
+  <div><h3>Explore</h3><ul><li><a href="#towns">Towns</a></li><li><a href="#things">Things to do</a></li><li><a href="#map-section">Map</a></li></ul></div>
+  <div><h3>Stay</h3><ul><li><a href="#book">Search accommodation</a></li><li><a href="#stay">Places to stay</a></li></ul></div>
+  <div><h3>Contact</h3><ul><li>Fish Creek, Victoria</li><li><a href="tel:+61386838833">+61 (03) 8683-8833</a></li><li><a href="https://promcoast.com.au/contact/">Contact us</a></li></ul></div>
+ </div>
+ <div class="copy">Copyright 2026 Prom Coast | All Rights Reserved. Some links are affiliate links; we may earn a commission at no cost to you.</div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ===== CONFIG: edit here ===== */
+var CONFIG={
+ base:'https://promcoast.com.au',
+ heroImage:'', // paste a Media Library image URL from promcoast.com.au here
+ bookingAid:'8133102',
+ bookingLabel:'affnetcj-17323539_pub-8027800_site-101843631_pname-Auto+Imports+Pty+Ltd_clkid-_cjevent-48dc75e0b0ce11f181cb01ca0a1eba37'
+};
+/* Town slugs are the real /destination/ pages. lat/lng = approximate town centres. */
+var TOWNS=[["Bena","bena",-38.4333,145.95],["Dumbalk","dumbalk",-38.5,146.0333],["Fish Creek","fish-creek",-38.6833,146.0667],["Foster","foster",-38.65,146.2],["Inverloch","inverloch",-38.6333,145.7278],["Kongwak","kongwak",-38.5,145.85],["Koonwarra","koonwarra",-38.55,145.95],["Korumburra","korumburra",-38.4333,145.8167],["Leongatha","leongatha",-38.4772,145.95],["Loch","loch",-38.3667,145.7167],["Meeniyan","meeniyan",-38.5667,146.0],["Mirboo North","mirboo-north",-38.4,146.1667],["Poowong","poowong",-38.3667,145.85],["Port Franklin","port-franklin",-38.6833,146.2833],["Port Welshpool","port-welshpool",-38.7,146.4333],["Sandy Point","sandy-point",-38.8,146.15],["Stony Creek","stony-creek",-38.5333,146.0167],["Tarwin Lower","tarwin-lower",-38.65,145.85],["Toora","toora",-38.65,146.3333],["Venus Bay","venus-bay",-38.6833,145.8167],["Walkerville","walkerville",-38.85,146.0],["Waratah Bay","waratah-bay",-38.85,146.1],["Yanakie","yanakie",-38.8,146.2]];
+var THINGS=[["⭐ Top 10 must do’s","things-you-cant-miss"],["🌊 Beaches, Swimming & Surfing","beaches-swimming-surfing"],["🥾 Walking, Hiking & Cycling","be-walking-hiking-cycling"],["🚗 Scenic Drives & Road Trips","scenic-drives-road-trips"],["🍷 Food, Wine & Local Produce","food-wine-local-produce"],["🐨 Wildlife & Nature","wildlife-nature"],["🏛️ History & Heritage","history-heritage"],["🎣 Fishing, Boating & Water Activities","fishing-boating-water-activities"],["🌅 Lookouts, Sunsets & Photography","lookouts-sunsets-photography"],["👪 Family Things to Do","family-things-to-do"],["📅 Events & What’s On","events-whats-on"],["🎨 Arts, Markets & Towns","arts-markets-towns"]];
+/* Map places: [name, category, lat, lng, url]. Add verified beaches/walks/food here. */
+var PLACES=TOWNS.map(function(t){return[t[0],'Towns',t[2],t[3],CONFIG.base+'/destination/'+t[1]+'/']})
+ .concat([["Wilsons Promontory (Tidal River)",'Parks & nature',-39.0333,146.3167,CONFIG.base+'/wildlife-nature/']]);
+
+var $=function(s){return document.querySelector(s)};
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+/* hero image */
+if(CONFIG.heroImage){$('#hero').style.backgroundImage='linear-gradient(180deg,rgba(10,52,66,.55),rgba(10,52,66,.88)),url("'+CONFIG.heroImage+'")'}
+
+/* menu */
+$('#menu').onclick=function(){var o=$('#nav').classList.toggle('open');this.setAttribute('aria-expanded',o)};
+document.querySelectorAll('#nav a').forEach(function(a){a.addEventListener('click',function(){$('#nav').classList.remove('open');$('#menu').setAttribute('aria-expanded','false')})});
+
+/* things + towns */
+$('#thingsGrid').innerHTML=THINGS.map(function(t){return'<a class="tile" href="'+CONFIG.base+'/'+t[1]+'/">'+esc(t[0])+'</a>'}).join('');
+function drawTowns(f){var l=TOWNS.filter(function(t){return t[0].toLowerCase().indexOf(f)>-1});
+ $('#townGrid').innerHTML=l.map(function(t){return'<a class="tile" href="'+CONFIG.base+'/destination/'+t[1]+'/">'+esc(t[0])+'</a>'}).join('');
+ $('#tempty').hidden=l.length>0}
+drawTowns('');$('#tsearch').oninput=function(){drawTowns(this.value.trim().toLowerCase())};
+
+/* booking search (opens Booking.com with your affiliate id) */
+var dest=$('#dest');
+dest.innerHTML='<option value="Gippsland, Australia">Greater Gippsland</option><option value="Wilsons Promontory National Park, Australia">Wilsons Promontory National Park</option>'+TOWNS.map(function(t){return'<option value="'+esc(t[0])+', Victoria, Australia">'+esc(t[0])+'</option>'}).join('');
+var g='';for(var i=1;i<=10;i++)g+='<option value="'+i+'"'+(i==2?' selected':'')+'>'+i+(i==1?' guest':' guests')+'</option>';$('#gst').innerHTML=g;
+var today=new Date().toISOString().slice(0,10);$('#cin').min=today;$('#cout').min=today;
+function bookUrl(ss,ci,co,ad){var q=['ss='+encodeURIComponent(ss),'aid='+CONFIG.bookingAid,'label='+CONFIG.bookingLabel,'lang=en-us','group_adults='+ad,'no_rooms=1','group_children=0'];
+ if(ci)q.push('checkin='+ci);if(co)q.push('checkout='+co);return'https://sp.booking.com/searchresults.en-us.html?'+q.join('&')}
+$('#book').onsubmit=function(e){e.preventDefault();var m=$('#bmsg'),ci=$('#cin').value,co=$('#cout').value;m.className='note';
+ if(!ci||!co){m.className='err';m.textContent='Please choose check-in and check-out dates.';return}
+ if(co<=ci||ci<today){m.className='err';m.textContent='Check-out must be after check-in, and dates cannot be in the past.';return}
+ m.textContent='Opening live availability on Booking.com…';
+ var w=window.open(bookUrl(dest.value,ci,co,$('#gst').value),'_blank','noopener');
+ if(!w)m.textContent='Your browser blocked the new tab. Please allow pop-ups for this site and try again.'};
+document.querySelectorAll('[data-book]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
+ var w=window.open(bookUrl(a.dataset.book,$('#cin').value,$('#cout').value,$('#gst').value),'_blank','noopener');if(!w)location.href='#book'})});
+
+/* site search: towns + things to do; fallback to full site search */
+var IDX=TOWNS.map(function(t){return[t[0],'Town',CONFIG.base+'/destination/'+t[1]+'/']}).concat(THINGS.map(function(t){return[t[0],'Things to do',CONFIG.base+'/'+t[1]+'/']}));
+var res=$('#results');
+$('#q').oninput=function(){var v=this.value.trim().toLowerCase();if(v.length<2){res.style.display='none';return}
+ var h=IDX.filter(function(x){return x[0].toLowerCase().indexOf(v)>-1}).slice(0,8).map(function(x){return'<a href="'+x[2]+'">'+esc(x[0])+'<small>'+x[1]+'</small></a>'}).join('');
+ if(!h)h='<p>No matches in the quick guide.</p>';
+ res.innerHTML=h+'<a href="'+CONFIG.base+'/?s='+encodeURIComponent(v)+'">Search the whole site for “'+esc(v)+'”</a>';res.style.display='block'};
+document.addEventListener('click',function(e){if(!e.target.closest('.hsearch'))res.style.display='none'});
+
+/* map */
+var map,cluster=[],active={},cats=[];
+PLACES.forEach(function(p){if(cats.indexOf(p[1])<0)cats.push(p[1])});cats.forEach(function(c){active[c]=true});
+$('#chips').innerHTML=cats.map(function(c){return'<button class="chip" aria-pressed="true" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join('');
+function drawMap(){var q=$('#msearch').value.trim().toLowerCase();
+ var vis=PLACES.filter(function(p){return active[p[1]]&&p[0].toLowerCase().indexOf(q)>-1});
+ if(map){cluster.forEach(function(m){map.removeLayer(m)});cluster=[];
+  vis.forEach(function(p){var m=L.marker([p[2],p[3]]).addTo(map).bindPopup('<strong>'+esc(p[0])+'</strong><br>'+esc(p[1])+'<br><a href="'+p[4]+'">Open guide</a>');m._p=p;cluster.push(m)});
+  if(vis.length)map.fitBounds(vis.map(function(p){return[p[2],p[3]]}),{padding:[30,30],maxZoom:11})}
+ $('#list').innerHTML=vis.length?vis.map(function(p,i){return'<button data-i="'+PLACES.indexOf(p)+'">'+esc(p[0])+'<br><small>'+esc(p[1])+'</small></button>'}).join(''):'<p style="padding:16px">No places match. Try another name or turn a category back on.</p>'}
+$('#chips').onclick=function(e){var b=e.target.closest('.chip');if(!b)return;var c=b.dataset.c;active[c]=!active[c];b.setAttribute('aria-pressed',active[c]);drawMap()};
+$('#msearch').oninput=drawMap;
+$('#list').onclick=function(e){var b=e.target.closest('button');if(!b||!map)return;var p=PLACES[b.dataset.i];map.setView([p[2],p[3]],12);
+ cluster.forEach(function(m){if(m._p===p)m.openPopup()})};
+(function init(){
+ if(typeof L==='undefined'){$('#mapmsg').textContent='The map could not be loaded. Check your connection and refresh. The list of places is still available.';drawMap();return}
+ $('#map').innerHTML='';map=L.map('map',{scrollWheelZoom:false}).setView([-38.6,146.1],9);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+ map.on('focus',function(){map.scrollWheelZoom.enable()});map.on('blur',function(){map.scrollWheelZoom.disable()});drawMap()})();
+</script>
+</body>
+</html>
